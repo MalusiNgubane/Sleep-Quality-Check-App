@@ -77,6 +77,14 @@ if st.button("Predict Sleep Quality"):
     
     # Scale the features
     scaled_input = scaler.transform(processed_input)
+
+with st.spinner('Analyzing your sleep quality...'):
+    # Show a progress bar
+    progress_bar = st.progress(0)
+    
+    # Make prediction
+    prediction = model.predict(scaled_input)[0]
+    progress_bar.progress(50)
     
     # Make prediction
     prediction = model.predict(scaled_input)[0]
@@ -88,6 +96,7 @@ if st.button("Predict Sleep Quality"):
     quality, color = get_sleep_quality_rating(prediction)
     st.markdown(f"<h3 style='color: {color}'>Sleep Quality Rating: {quality}</h3>", 
                 unsafe_allow_html=True)
+    progress_bar.progress(75)
     
     # Display recommendations
     st.subheader("Recommendations:")
@@ -96,6 +105,10 @@ if st.button("Predict Sleep Quality"):
     )
     for rec in recommendations:
         st.write("• " + rec)
+    
+    progress_bar.progress(100)
+    # Optional: remove progress bar after completion
+    progress_bar.empty()
 
 # Add footer with additional information
 st.markdown("---")
