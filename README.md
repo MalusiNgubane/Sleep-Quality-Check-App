@@ -5,7 +5,7 @@ Main Base: A machine learning application that predicts sleep quality based on v
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/Sleep-Quality-Check-App.git
+git clone https://github.com/MalusiNgubane/Sleep-Quality-Check-App.git
 cd Sleep-Quality-Check-App
 ```
 
