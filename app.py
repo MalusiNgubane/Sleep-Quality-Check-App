@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import time
-from src.utils import (
+from utils import (
     load_model,
     process_input_data,
     get_sleep_quality_rating,
