@@ -19,6 +19,10 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+Or , you can use the app directly on:
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sleep-quality.streamlit.app/)
+
 ## Project Structure
 - `app.py`: Main Streamlit application
 - `src/utils.py`: Utility functions for data processing
