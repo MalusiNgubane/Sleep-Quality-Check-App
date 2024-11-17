@@ -55,7 +55,7 @@ with col2:
         options=['no', 'yes']
     )
 
-# Predict button
+# Inside your "Predict Sleep Quality" button click handler
 if st.button("Predict Sleep Quality"):
     # Create input data dictionary
     input_data = {
@@ -75,40 +75,39 @@ if st.button("Predict Sleep Quality"):
     # Process input data
     processed_input = process_input_data(input_data, feature_names)
     
-    # Scale the features
-    scaled_input = scaler.transform(processed_input)
-
-with st.spinner('Analyzing your sleep quality...'):
-    # Show a progress bar
-    progress_bar = st.progress(0)
-    
-    # Make prediction
-    prediction = model.predict(scaled_input)[0]
-    progress_bar.progress(50)
-    
-    # Make prediction
-    prediction = model.predict(scaled_input)[0]
-    
-    # Display prediction
-    st.success(f"Predicted Sleep Quality Score: {prediction:.2f}/10")
-    
-    # Get and display quality rating
-    quality, color = get_sleep_quality_rating(prediction)
-    st.markdown(f"<h3 style='color: {color}'>Sleep Quality Rating: {quality}</h3>", 
-                unsafe_allow_html=True)
-    progress_bar.progress(75)
-    
-    # Display recommendations
-    st.subheader("Recommendations:")
-    recommendations = generate_recommendations(
-        sleep_duration, daily_steps, physical_activity, dietary_habits
-    )
-    for rec in recommendations:
-        st.write("• " + rec)
-    
-    progress_bar.progress(100)
-    # Optional: remove progress bar after completion
-    progress_bar.empty()
+    # Add spinner around all prediction-related code
+    with st.spinner('Analyzing your sleep quality...'):
+        # Show a progress bar
+        progress_bar = st.progress(0)
+        
+        # Scale the features
+        scaled_input = scaler.transform(processed_input)
+        progress_bar.progress(25)
+        
+        # Make prediction
+        prediction = model.predict(scaled_input)[0]
+        progress_bar.progress(50)
+        
+        # Display prediction
+        st.success(f"Predicted Sleep Quality Score: {prediction:.2f}/10")
+        
+        # Get and display quality rating
+        quality, color = get_sleep_quality_rating(prediction)
+        st.markdown(f"<h3 style='color: {color}'>Sleep Quality Rating: {quality}</h3>", 
+                    unsafe_allow_html=True)
+        progress_bar.progress(75)
+        
+        # Display recommendations
+        st.subheader("Recommendations:")
+        recommendations = generate_recommendations(
+            sleep_duration, daily_steps, physical_activity, dietary_habits
+        )
+        for rec in recommendations:
+            st.write("• " + rec)
+        
+        progress_bar.progress(100)
+        # Optional: remove progress bar after completion
+        progress_bar.empty()
 
 # Add footer with additional information
 st.markdown("---")
